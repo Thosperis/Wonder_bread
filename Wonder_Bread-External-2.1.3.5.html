@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<html lang='en' class=''>
+<meta http-equiv="Cache-control" content="public">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Tab Protocal-E</title>
+    <body>
+<style>
+/*1920px Image Size*/
+.Youtube img, .GIcon img, .KissAnime img, .Tiktok img, .Placeholder img, .Chromoting img, .Spectrum img, .KissCartoon img, .ChatGPT img, .Discord img, .Gmail img, .MAL img, .ANI img, .PCP img, .AM img {
+    width: 42px;
+    height: 42px;
+            }
+/*1280px Image Size*/
+@media only screen and (max-width: 1280px) {
+.Youtube img, .KissAnime img, .Tiktok img, .Placeholder img, .Chromoting img, .Spectrum img, .KissCartoon img, .ChatGPT img, .Discord img, .Gmail img, .MAL img, .ANI img {
+    width: 50px;
+    height: 50px;
+            }
+}
+</style>
+<!--TogCon-->
+<button id="toggleButton">Tog Cons</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    // Function to toggle visibility
+    function toggleVisibility() {
+        // List of div class names you want to toggle
+        const divClasses = ['Placeholder', 'MAL','ANI','KissAnime'];
+
+        divClasses.forEach(className => {
+            const divs = document.getElementsByClassName(className);
+            for (const div of divs) {
+                if (div.style.display === 'none') {
+                    div.style.display = 'block';
+                } else {
+                    div.style.display = 'none';
+                }
+            }
+        });
+    }
+
+    // Add click event listener to the button
+    document.getElementById('toggleButton').addEventListener('click', toggleVisibility);
+});
+</script>
+<style>
+/*TogCon1920px*/
+#toggleButton {
+    position: fixed;
+top: 2px;
+  left: 2px;
+    z-index: 1000;
+    
+    padding: 10px 25px;
+    background: #263238; /* Dark shade for the default state */
+    border: none; /* Removing the border for a cleaner look */
+    border-radius: 5px;
+    
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: none; /* Removing text shadow for a flat design */
+    
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    
+    transition: all 0.3s ease;
+}
+
+#toggleButton:hover {
+    background: #ffffff; /* White background for hover */
+    color: #263238; /* Dark text color when hovered */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+#toggleButton:active {
+    background: #eceff1; /* Light grey for the active state to simulate a press effect */
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    transform: translateY(1px);
+}
+</style>
+<!Clock!>
+<div id="clock"></div>
+<style>
+/*clock */
+        bodi {
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+        }
+
+        #clock {
+            font-size: 2em;
+            position: absolute;
+            top: 20px;
+            margin: 0;
+            padding: 0;
+            left: 50%;
+            color: green;
+            font-family: Arial, sans-serif;
+            transform: translateX(-50%);
+        }
+</style>
+<script>
+
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let ampm = hours >= 12 ? 'PM' : 'AM';
+
+            // Convert to 12-hour format
+            hours = hours % 12 || 12; // Handle midnight (0) as 12
+
+            // Add leading zeros to minutes
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+
+            const timeString = `${hours}:${minutes} ${ampm}`;
+            document.getElementById('clock').textContent = timeString;
+        }
+
+        // Update the clock every second
+        setInterval(updateClock, 1000);
+
+        // Initial call to set the clock
+        updateClock();
+</script>
+
+<! Weather API!>
+     <style>
+        #weather {
+            background: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+            border-radius: 40px; /* Rounded corners */
+            padding: 0px;
+            text-align: center;
+            width: 200px; /* Fixed width */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            position: fixed; /* Fixed position */
+            top: 7%; /* Distance from the top */
+            left: 7%; /* Distance from the right */
+            transform: translateY(-50%);
+            z-index: 100; /* Ensure it's above other elements */
+        }
+
+        #weather h2 {
+            color: #555;
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        #weather p {
+            margin: 5px 0;
+            color: #555;
+            font-family: Arial, sans-serif;
+        }
+
+/* Adjusting the size for smaller screens */
+/*WD 1416px*/
+/*Weather Display 1416px*/
+@media (max-width: 1416px) {
+  #weather {
+            top: 7%; /* Distance from the top */
+            left: 10%; /* Distance from the right */
+  }
+}
+/*WD 976px*/
+/*Weather Display 976px*/
+@media (max-width: 976px) {
+  #weather {
+            left: 16%; /* Distance from the right */
+  }
+}
+/*WD 750x*/
+/*Weather Display 750px*/
+@media (max-width: 750px) {
+  #weather {
+            left: 0%; /* Distance from the right */
+                        background: rgba(255, 255, 255, 0); /* Semi-transparent white */
+                        top: 22%;
+  }
+}
+    </style>
+    <div id="weather">
+        <p>Loading weather data...</p>
+    </div>
+<!Weather API!>
+    <script>
+        const apiKey = '0386d264ae9cf72184205036f7c01848'; // Your OpenWeatherMap API key
+        //const city = 'picayune'; // Replace with your desired city
+        const lat = 30.6255934; 
+        const lon = -89.6533405; 
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
+
+        function fetchWeatherData() {
+            const cachedData = localStorage.getItem('weatherData');
+            const lastFetchTime = localStorage.getItem('lastFetchTime');
+            const currentTime = new Date().getTime();
+
+            if (cachedData && lastFetchTime && currentTime - lastFetchTime < 600000) {
+                updateWeatherUI(JSON.parse(cachedData));
+            } else {
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        localStorage.setItem('weatherData', JSON.stringify(data));
+                        localStorage.setItem('lastFetchTime', currentTime.toString());
+                        updateWeatherUI(data);
+                    })
+                    .catch(error => {
+                        document.getElementById('weather').innerHTML = '<p>Error fetching weather data.</p>';
+                        console.error('There has been a problem with your fetch operation:', error);
+                    });
+            }
+        }
+    function willItRain(weatherData) {
+        // Check if any of the weather condition codes indicate rain
+        return weatherData.weather.some(condition => {
+            // Codes for various types of rain range from 500 to 531
+            return condition.id >= 500 && condition.id <= 531;
+        });
+    }
+    function updateWeatherUI(data) {
+        const weatherDiv = document.getElementById('weather');
+        const rainIndicator = willItRain(data) ? 'Yes' : 'No';
+
+        weatherDiv.innerHTML = `
+            <p><strong>Temperature:</strong> ${data.main.temp} °F</p>
+            <p><strong>Conditions:</strong> ${data.weather[0].description}</p>
+            <p><strong>Wind:</strong> ${data.wind.speed} mph</p>
+            <p><strong>Rain:</strong> ${rainIndicator}</p>`;
+    }
+
+
+        fetchWeatherData();
+        setInterval(fetchWeatherData, 600000); // Fetch new data every 10 minutes
+    </script>
+
+<!-- END OF WEATHER! -->
+<!-- START OF RADAR! -->
+
+<style>
+  /* CSS styles */
+  #iframeContainer {
+    width: 650px;
+    height: 450px;
+    padding: 10px;
+    border: 2px;
+    position: relative; /* Needed for absolute positioning of children */
+    resize: both; /* Make the div resizable */
+    overflow: hidden; /* Prevent scrollbars on resize */
+  }
+  #moveBar {
+    width: 100%;
+    background: #007bff;
+    color: white;
+    padding: 5px;
+    cursor: move; /* Indicates the element is movable */
+    user-select: none; /* Prevents text selection during drag */
+  }
+</style>
+
+<div id="iframeContainer">
+  <div id="moveBar">Move</div>
+  <iframe id="iframe" frameborder="0"></iframe>
+</div>
+
+<script>
+window.addEventListener('resize', adjustRadarPosition);
+
+function adjustRadarPosition() {
+  const iframeContainer = document.getElementById('iframeContainer');
+  const radarRect = iframeContainer.getBoundingClientRect();
+  const scaleX = window.innerWidth / screen.availWidth;
+  const scaleY = window.innerHeight / screen.availHeight;
+  const scale = Math.min(scaleX, scaleY);
+
+  // Scale the radar based on the window size
+  iframeContainer.style.transform = `scale(${scale})`;
+
+  // Adjust the radar position based on the scale
+  if (radarRect.right * scale > window.innerWidth) {
+    iframeContainer.style.left = `${(window.innerWidth - radarRect.width * scale) / 2}px`;
+  }
+  if (radarRect.bottom * scale > window.innerHeight) {
+    iframeContainer.style.top = `${(window.innerHeight - radarRect.height * scale) / 2}px`;
+  }
+
+  // Save the adjusted position and size
+  saveState();
+}
+
+// Call adjustRadarPosition on window resize
+window.addEventListener('mouseup', function() {
+  adjustRadarPosition();
+});
+
+// Initialize radar and make it draggable
+document.addEventListener('DOMContentLoaded', (event) => {
+  // Make the iframeContainer resizable and movable
+  const iframeContainer = document.getElementById('iframeContainer');
+  makeDraggable(iframeContainer, document.getElementById('moveBar'));
+  
+  // Load the saved state, if any
+  loadState();
+
+  // Save the size of the iframeContainer on resize
+  iframeContainer.onresize = function() {
+    saveState();
+  }
+
+  // Adjust radar position on initialization in case of different resolution
+  adjustRadarPosition();
+});
+
+  // Function to save the position and size of the iframeContainer
+  function saveState() {
+    const iframeContainer = document.getElementById('iframeContainer');
+    const state = {
+      width: iframeContainer.style.width,
+      height: iframeContainer.style.height,
+      top: iframeContainer.style.top,
+      left: iframeContainer.style.left
+    };
+    localStorage.setItem('iframeState', JSON.stringify(state));
+  }
+
+  // Function to load the saved state, if it exists
+  function loadState() {
+    const state = JSON.parse(localStorage.getItem('iframeState'));
+    if (state) {
+      const iframeContainer = document.getElementById('iframeContainer');
+      iframeContainer.style.width = state.width;
+      iframeContainer.style.height = state.height;
+      iframeContainer.style.top = state.top;
+      iframeContainer.style.left = state.left;
+    }
+  }
+
+  // Function to make an element draggable
+  function makeDraggable(element, dragHandle) {
+    let offsetX, offsetY;
+    dragHandle.onmousedown = function(e) {
+      offsetX = e.clientX - parseInt(window.getComputedStyle(element).left);
+      offsetY = e.clientY - parseInt(window.getComputedStyle(element).top);
+      document.onmousemove = function(e) {
+        element.style.left = e.clientX - offsetX + 'px';
+        element.style.top = e.clientY - offsetY + 'px';
+      }
+      document.onmouseup = function() {
+        document.onmousemove = document.onmouseup = null;
+        saveState(); // Save the new position after moving
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', (event) => {
+    // Initialize the iframe
+    var iframe = document.getElementById('iframe');
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.src = "https://embed.windy.com/embed2.html?lat=30.544&lon=-89.690&detailLat=30.544&detailLon=-89.690&width=650&height=450&zoom=5&level=surface&overlay=wind&product=ecmwf&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=mph&metricTemp=%C2%B0F&radarRange=-1";
+
+    // Make the iframeContainer resizable and movable
+    const iframeContainer = document.getElementById('iframeContainer');
+    makeDraggable(iframeContainer, document.getElementById('moveBar'));
+    
+    // Load the saved state, if any
+    loadState();
+
+    // Save the size of the iframeContainer on resize
+    iframeContainer.onresize = function() {
+      saveState();
+    }
+  });
+</script>
+<!-- END OF RADAR! -->
+    <!Start of Status!>
+        <div id="serverStatus">Checking...</div>
+    <style>
+       #serverStatus {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: grey;
+            color: white;
+            font-family: Arial, sans-serif;
+            z-index: 1000;
+        }
+    </style>
+    <script>
+// Add a function to check the server status
+function checkServerStatus() {
+    fetch('https://192.168.1.146/', {
+        method: 'HEAD',
+        cache: 'no-cache' // Bypass the cache
+    })
+    .then(response => {
+        if (response.ok) {
+            document.getElementById('serverStatus').textContent = 'ONLINE';
+            document.getElementById('serverStatus').style.backgroundColor = 'green';
+            document.getElementById('serverStatus').style.color = 'white';
+        } else {
+            throw new Error('Server not responding');
+        }
+    })
+    .catch(error => {
+        document.getElementById('serverStatus').textContent = 'OFFLINE';
+        document.getElementById('serverStatus').style.backgroundColor = 'red';
+        document.getElementById('serverStatus').style.color = 'white';
+    });
+}
+
+// Call checkServerStatus on page load
+window.addEventListener('load', () => {
+    checkServerStatus();
+    // ... (any other load events)
+});
+</script>
+<!END OF STATUS!>
+
+<!Video Background!>
+<video id="background-video" autoplay loop muted poster="https://cdn.discordapp.com/attachments/893983437608865822/1137284320164331520/wallpaper.jpg?width=706&height=442">
+  <source src="https://cdn.discordapp.com/attachments/893983437608865822/949060249728467024/The_Legend_of_Hei_WallPaper.mp4" type="video/mp4">
+  </video>
+<style>
+
+ /* video background */
+#background-video {
+  height: 100vh;
+  width: 100vw;
+  object-fit: cover;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+/* page content */
+h1, h2 {
+  color: white;
+  font-family: Trebuchet MS;
+  font-weight: bold;
+  text-align: center;
+}
+
+h1 {
+  font-size: 6rem;
+  margin-top: 30vh; 
+}
+
+h2 { font-size: 3rem; }
+/* Background Video */
+@media (max-width: 250px) {
+    #background-video { display: none; }
+    body {
+      /*background: url(https://cdn.discordapp.com/attachments/893983437608865822/949060249728467024/The_Legend_of_Hei_WallPaper.mp4") no-repeat;
+      background-size: cover; */
+    }
+} /* Background Picture */
+       body {
+  background-image: url('https://cdn.discordapp.com/attachments/893983437608865822/1137284320164331520/wallpaper.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+            margin: 200px 40%;
+      }
+</style>
+  <!Google Search Bar!>
+    <form role="search" id="form">
+      <input type="search" id="query" name="q" placeholder="Search" aria-label="Search through site content">
+    </form>
+<style>
+/*Google Bar*/
+/*GSB 1920px*/
+/*Search Bar 1920px*/
+form {
+position: absolute;
+top: 90%;
+left: 38%;
+background: #2f3640;
+height: 6.5%;
+width: 20%;
+border-radius: 11px;
+padding: 10px;
+}
+
+/*GSB 1280px*/
+/*Search Bar 1280px*/
+@media (max-width: 1280px) {
+  #form {
+top: 86%;
+width: 33%;
+left: 28%;
+transform: translateX(10%)
+  }
+}
+
+/*GSB 880px*/
+/*Search Bar 880px*/
+@media (max-width: 880px) {
+  #form {
+top: 86%;
+width: 44%;
+left: -4%;
+transform: translateX(10%)
+  }
+}
+/*GSB 600px*/
+/*Search Bar 600px*/
+@media (max-width: 600px) {
+  #form {
+top: 86%;
+width: 64%;
+left: -4%;
+transform: translateX(10%)
+  }
+}
+/*GSB400px*/
+/*Search Bar 400px*/
+@media (max-width: 400px) {
+  #form {
+top: 91%;
+    width: 91%;
+    left: -8%;
+    transform: top: 91%;
+    width: 91%;
+    left: -8%;
+    transform: 
+position: absolute;
+transform: translateX(10%)
+  }
+}
+
+      input {
+        all: unset;
+        font: 16px system-ui;
+        color: #fff;
+        height: 100%;
+        width: 100%;
+        padding: 6px 10px;
+      }
+
+      ::placeholder {
+        color: #fff;
+        opacity: 0.7; 
+      }
+
+      svg {
+        color: #fff;
+        fill: currentColor;
+        width: 24px;
+        height: 24px;
+        padding: 10px;
+      }
+
+      button {
+        all: unset;
+        cursor: pointer;
+        width: 44px;
+        height: 44px;
+      }
+</style>
+<script>
+//Google Search//
+document.addEventListener('DOMContentLoaded', (event) => {
+  const form = document.getElementById('form');
+  const query = document.getElementById('query');
+  const google = 'https://www.google.com/search?q=';
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const encodedQuery = encodeURIComponent(query.value);
+    const url = google + encodedQuery;
+    window.open(url, '_blank');
+  });  // Added closing parenthesis and curly brace here
+});
+</script>
+<!Quick Links!>
+<!=================================!>
+<!Start of youtube!>
+<div class="Youtube">
+<img src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.a18gfLheJi2vuAqrJnukWgHaHa%26pid%3DApi&f=1&ipt=8f93943edc6e3b779cc76ac22a1b94ffd3c55cb311ceba0376e5f5e412b0ba7a&ipo=images' onclick='Youtube()'>
+</div>
+<! End of Youtube!>
+<!Javascript to open in new tab!>
+    <script>
+        function Youtube() {
+            window.location.replace('https://youtube.com');
+        }
+</script>
+<style>
+
+/* Y1920*/
+/* Youtube Position 1920px*/
+.Youtube {
+position: absolute;
+top: 92%;
+left: 87.7%;
+width: 42px;
+height: 42px;
+}
+/* Y1280*/
+/* Youtube Position 1280px*/
+@media (max-width: 1280px) {
+.Youtube {
+top: 85%;
+left: 81%;
+  }
+}
+/* Y880*/
+/* Youtube Position 880px*/
+@media (max-width: 880px) {
+.Youtube {
+top: 86%;
+left: 90.5%;
+width: 100px; /* Increased size for better touch */
+height: 52px;
+transform: translateX(10%); 
+  }
+}
+/*Y540*/
+/* Youtube Position 540px*/
+@media (max-width: 540px) {
+.Youtube {
+top: 8.6%;
+left: 84%;
+  }
+}
+/* Y400*/
+/* Youtube Position 400px*/
+@media (max-width: 400px) {
+.Youtube {
+top: 85%;
+left: 74%;
+width: 32px; /* Decreased size for better touch */
+height: 32px;
+  }
+}
+</style>
+<!Start Of Google Icon!>
+<div class="GIcon">
+<img src='https://media.discordapp.net/attachments/893983437608865822/1137280143212150835/GIcon.png' onclick='Tic()'">
+</div>
+<style>
+/* GCon1920px*/
+/*GIcon Position 1920px*/
+.GIcon {
+position: absolute;
+top: 92.5%; 
+left: 55%;
+overflow: hidden;
+}
+/* GCon1280px*/
+/*GIcon Position 1280px*/
+@media (max-width: 1280px) {
+.GIcon {
+position: absolute;
+top: 87.5%;
+left: 60%;
+overflow: hidden;
+}
+}
+/* GCon880px*/
+/*GIcon Position 880px*/
+@media (max-width: 880px) {
+.GIcon {
+position: absolute;
+top: 87.5%;
+left: 39%;
+overflow: hidden;
+}
+}
+/* GCon600px*/
+/*GIcon Position 600px*/
+@media (max-width: 600px) {
+.GIcon {
+position: absolute;
+top: 87.5%;
+left: 59%;
+overflow: hidden;
+}
+}
+/* GCon400px*/
+/* GIcon Position 400px*/
+@media (max-width: 400px) {
+.GIcon {
+position: absolute;
+top: 87.5%;
+right: 60%;
+overflow: hidden;
+}
+}
+</style>
+<!Javascript to open in new tab!>
+<!THIS IS BROKEN!>
+    <script>
+        function Tic() {
+            window.location.replace('https://cdn.discordapp.com/attachments/893983437608865822/1137282028363055124/Index.html');
+        }
+</script>
+<!End Of Google Icon!>
+<!=================================!>
+<!Start Of Kissanime!>
+<div class="KissAnime">
+<img src='https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpm1.narvii.com%2F5804%2Fe4bf10d4153171b278ee80a8c361269f459f8e98_hq.jpg&f=1&nofb=1&ipt=37d4b8cbad53bbbecd1b8c700438a5f0cb9318bc8e80a3f47f7b6d668ded5a97&ipo=images' onclick='KissAnime()'">
+</div>
+<!Javascript to open in new tab!>
+    <script>
+        function KissAnime() {
+            window.location.replace('https://kissanime.co/kissanime-home.html');
+        }
+</script>
+
+<style>
+
+/*KA1920*/
+/*Kissanime Position 1920px*/
+.KissAnime {
+position: absolute;
+top: 92%; left: 91%;
+overflow: hidden;
+}
+/* KA1280*/
+/* KissAnime Position 1280px*/
+@media (max-width: 1280px) {
+  .KissAnime {
+top: 85%;
+left: 93%;
+  }
+}
+/* KA880*/
+/* KissAnime Position 880px*/
+@media (max-width: 880px) {
+  .KissAnime {
+    top: 93%;
+    left: 82.5%;
+    transform: translateX(10%); 
+  }
+}
+/* KA540*/
+/* KissAnime Position 540px*/
+@media (max-width: 540px) {
+  .KissAnime {
+top: 93%;
+left: 73%;
+transform: translateX(10%); 
+  }
+}
+
+/* KA400*/
+/* KissAnime Position 400px*/
+@media (max-width: 400px) {
+  .KissAnime {
+top: 85%;
+left: 36.5%;
+transform: translateX(10%); 
+  }
+}
+</style>
+<!End Of  Kissanime>
+<!Start Of Tiktok!>
+<div class="Tiktok">
+<img src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F130759%2Fscreenshots%2F14937923%2Ftiktok_4x.png&f=1&nofb=1&ipt=9214caaf7bccfaab3f9e1996f336ec93fef3bc644e6067e81f9c6bdb51fa9853&ipo=images' onclick='Tiktok()'">
+</div>
+<!Javascript to open in new tab!>
+    <script>
+        function Tiktok() {
+            window.location.replace('https://www.tiktok.com');
+        }
+</script>
+<style>
+/* T1920*/
+/*Tiktok Position 1920px*/
+.Tiktok {
+position: absolute;
+top: 92%; 
+left: 93.5%;
+overflow: hidden;
+}
+/* T1280*/
+/* Tiktok Position 1280px*/
+@media (max-width: 1280px) {
+  .Tiktok {
+top: 92%;
+left: 88%;
+  }
+}
+/* T880*/
+/* Tiktok Position 880px*/
+@media (max-width: 880px) {
+  .Tiktok {
+top: 93%;
+left: 90.5%;
+width: 100px; /* Increased size for better touch */
+height: 52px;
+transform: translateX(10%); 
+  }
+}
+
+
+/* T540*/
+/* Tiktok Position 540px*/
+@media (max-width: 540px) {
+  .Tiktok {
+top: 93%;
+left: 86%;
+width: 100px; /* Increased size for better touch */
+height: 52px;
+transform: translateX(10%); 
+  }
+}
+
+/* T400*/
+/* Tiktok Position 400px*/
+@media (max-width: 400px) {
+  .Tiktok {
+top: 8%;
+    left: 67.5%;
+width: 100px; /* Increased size for better touch */
+height: 52px;
+transform: translateX(10%); 
+  }
+}
+</style>
+<!End Of Tiktok!>
+<!Start of Chrome Remote desktop!>
+<div class="Chromoting">
+<img src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flh3.googleusercontent.com%2FI4DRWoABrUQsaAIQFVSKha98q1u2ilEdrwPJBaf9Mb8KdGZnXzs5DObrwcwUZovgOA%3Ds180&f=1&nofb=1&ipt=6e46c728c8606e5059c2ba9f8995873c54fb195c2c33c5631bd45f952024309c&ipo=images' onclick='Chromoting()'">
+</div>
+<!Javascript to open in new tab!>
+    <script>
+        function Chromoting() {
+            window.location.replace('https://remotedesktop.google.com/access/');
+        }
+</script>
+<style>
+
+/*C1920*/
+/*Chromoting Position 1920px*/
+.Chromoting {
+position: absolute;
+top: 92%; left: 81%;
+overflow: hidden;
+}
+/* C1280px*/
+@media (max-width: 1280px) {
+  .Chromoting {
+top: 92%;
+left: 78%;
+  }
+}
+/* C880*/
+/* Chromoting Position 880px*/
+@media (max-width: 880px) {
+  .Chromoting {
+    top: 80%;
+    left: 90.5%;
+    width: 100px; /* Increased size for better touch */
+    height: 52px;
+    transform: translateX(10%); 
+  }
+}
+/* C540*/
+/* Chromoting Position 540px*/
+@media (max-width: 540px) {
+  .Chromoting {
+top: 86%;
+left: 71.5%;
+width: 100px; /* Increased size for better touch */
+height: 52px;
+transform: translateX(10%); 
+  }
+}
+
+
+
+
+/* C400*/
+/* Chromoting Position 400px*/
+@media (max-width: 400px) {
+  .Chromoting {
+top: 85%;
+left: 11.5%;
+width: 100px; /* Increased size for better touch */
+height: 52px;
+transform: translateX(10%); 
+  }
+}
+</style>
+<!End Of Chromoting!>
+<!Start of Spectrum!>
+<div class="Spectrum">
+<img src='https://d12jofbmgge65s.cloudfront.net/wp-content/uploads/2023/01/tech-guide_header-image-charter-spectrum.webp' onclick='Spectrum()'">
+</div>
+<!Javascript to open in new tab!>
+    <script>
+        function Spectrum() {
+            window.location.replace('https://watch.spectrum.net/ondemand/featured');
+        }
+</script>
+<style>
+
+/*S1920*/
+/*Spectrum Position 1920px*/
+.Spectrum {
+position: absolute;
+top: 92%;
+ left: 78%;
+overflow: hidden;
+}
+/* S1280*/
+/* Spectrum Position 1280px*/
+@media (max-width: 1280px) {
+  .Spectrum {
+top: 92%;
+left: 94%;
+  }
+}
+/* S880px*/
+/* Spectrum Position 880px*/
+@media (max-width: 880px) {
+  .Spectrum {
+top: 86%;
+left: 73.5%;
+transform: translateX(10%); 
+  }
+}
+/* S540px*/
+/* Spectrum Position 540px*/
+@media (max-width: 540px) {
+  .Spectrum {
+top: 9%;
+left: 71%;
+transform: translateX(10%); 
+  }
+}
+/* S400*/
+/* Spectrum Position 400px*/
+@media (max-width: 400px) {
+  .Spectrum {
+top: 85%;
+left: 61.5%;
+transform: translateX(10%); 
+  }
+}
+</style>
+<!End Of Spectrum!>
+<!Start of KissCartoon!>
+<div class="KissCartoon">
+<img src='https://apkals.com/wp-content/uploads/2019/12/Kisscartoon-icon.png' onclick='KissCartoon()'">
+</div>
+<!Javascript to open in new tab!>
+    <script>
+        function KissCartoon() {
+            window.location.replace('https://www.tiktok.com');
+        }
+</script>
+<style>
+
+/* KA1920*/
+/*KissCartoon Position 1920px*/
+.KissCartoon {
+position: absolute;
+top: 92%; left: 74%;
+overflow: hidden;
+}
+/* KC1280*/
+/* KissCartoon Position 1280px*/
+@media (max-width: 1280px) {
+  .KissCartoon {
+top: 85%;
+left: 87%;
+  }
+}
+/* KC880*/
+/* KissCartoon Position 880px*/
+@media (max-width: 880px) {
+  .KissCartoon {
+top: 93%;
+left: 73.5%;
+transform: translateX(10%); 
+  }
+}
+/* KC540*/
+/* KissCartoon Position 540px*/
+@media (max-width: 540px) {
+  .KissCartoon {
+top: 2%;
+left: 71.5%;
+transform: translateX(10%); 
+  }
+}
+
+/* KC400*/
+/* KissCartoon Position 400px*/
+@media (max-width: 400px) {
+  .KissCartoon {
+top: 85%;
+left: 0.5%;
+transform: translateX(10%); 
+  }
+}
+</style>
+<!End Of KissCartoon!>
+<!Start of ChatGPT!>
+<div class="ChatGPT">
+<img src='https://cdn-icons-png.flaticon.com/512/12222/12222588.png' onclick='ChatGPT()'">
+</div>
+<!Javascript to open in new tab!>
+    <script>
+        function ChatGPT() {
+            window.location.replace('https://chat.openai.com/');
+        }
+</script>
+<style>
+/*GPT1920*/
+/*ChatGPT Position 1920px*/
+.ChatGPT {
+position: absolute;
+top: 92%;
+left: 71%;
+overflow: hidden;
+}
+/* GPT1280*/
+/* ChatGPT Position 1280px*/
+@media (max-width: 1280px) {
+  .ChatGPT {
+top: 92%;
+left: 72%;
+  }
+}
+/* GPT880px*/
+@media (max-width: 880px) {
+  .ChatGPT {
+    top: 80%;
+    left: 82.5%;
+    transform: translateX(10%); 
+  }
+}
+/* GPT540px*/
+@media (max-width: 540px) {
+  .ChatGPT {
+top: 86%;
+left: 86%;
+transform: translateX(10%); 
+  }
+}
+/* GPT400*/
+/* ChatGPT Position 400px*/
+@media (max-width: 400px) {
+  .ChatGPT {
+top: 85%;
+left: 24.5%;
+transform: translateX(10%); 
+  }
+}
+</style>
+<!End Of ChatGPT>
+<!Start of Placeholder!>
+<div class="Placeholder">
+<img src='' onclick='Placeholder()'">
+</div>
+<!Javascript to open in new tab!>
+    <script>
+        function Placeholder() {
+            window.location.replace('');
+        }
+</script>
+<style>
+/* V1920*/
+/*Placeholder Position 1920px*/
+.Placeholder {
+position: absolute;
+top: 92%;
+left: 84%;
+overflow: hidden;
+}
+/* V1280*/
+/* Placeholder Position 1280px*/
+@media (max-width: 1280px) {
+  .Placeholder {
+top: 92%;
+left: 83%;
+  }
+}
+/* V880*/
+/* Placeholder Position 880px*/
+@media (max-width: 880px) {
+  .Placeholder {
+top: 80%;
+left: 73.5%;
+  }
+}
+/* V400*/
+/* Placeholder Position 400px*/
+@media (max-width: 400px) {
+  .Placeholder {
+top: 84%;
+    left: 85.5%;
+transform: translateX(10%); 
+  }
+}
+</style>
+<!End Of Placeholder!>
+<!Start Of Discord!>
+<div class="Discord">
+<img src='https://images-ext-1.discordapp.net/external/tVkMtGxATMR_xrUGFqU0FLIlThJ5ov_070R7Dz_4_XA/https/seeklogo.com/images/D/discord-wordmark-white-logo-E95C468613-seeklogo.com.png?format=webp&width=200&height=200' onclick='Discord()'">
+</div>
+<!Javascript to open in new tab!>
+    <script>
+        function Discord() {
+            window.location.replace('https://discord.com/channels/@me');
+        }
+</script>
+<style>
+/*D1920*/
+/*Discord Position 1920px*/
+.Discord {
+position: absolute;
+top: 92%; left: 68%;
+overflow: hidden;
+}
+/* D1280*/
+/* Discord Position 1280px*/
+@media (max-width: 1280px) {
+  .Discord {
+top: 85%;
+left: 75%;
+  }
+}
+/* D880*/
+/* Discord Position 880px*/
+@media (max-width: 880px) {
+  .Discord {
+    top: 80%;
+    left: 73.5%;
+    transform: translateX(10%); 
+  }
+}
+/* D540*/
+/* Discord Position 540px*/
+@media (max-width: 540px) {
+  .Discord {
+top: 2%;
+left: 85%;
+transform: translateX(10%); 
+  }
+}
+/* D400*/
+/* Discord Position 400px*/
+@media (max-width: 400px) {
+  .Discord {
+top: 85%;
+left: 49.5%;
+transform: translateX(10%); 
+  }
+}
+</style>
+<!Start of Hei!>
+<div class="Hei">
+<img src='https://media.discordapp.net/attachments/893983437608865822/1192935749423726743/Hei.png?ex=65aae2fe&is=65986dfe&hm=c08f52f0a572ce103183afdc600c23daffcbf274c82e6a765dc628f40fac8b37&=&format=webp&quality=lossless' onclick='Hei()'">
+</div>
+<style>
+/* Hei1920*/
+/*Hei Position*/
+.Hei {
+position: absolute;
+top: 95%;
+left: 0%;
+overflow: hidden;
+}
+/* Hei400*/
+/* Hei Position 400px*/
+@media (max-width: 400px) {
+  .Hei {
+top: 10%;
+    left: -7%;
+    width: 248px;
+    height: 50px;
+transform: translateX(10%); 
+  }
+}
+</style>
+<!Start of Gmail!>
+<div class="Gmail">
+<img src='https://static.vecteezy.com/system/resources/previews/016/716/465/non_2x/gmail-icon-free-png.png' onclick='Gmail()'">
+</div>
+<!Javascript to open in new tab!>
+    <script>
+        function Gmail() {
+            window.location.replace('https://mail.google.com/mail/u/0/#inbox');
+        }
+</script>
+<style>
+/* G1920*/
+/*Gmail Position 1920px*/
+.Gmail {
+position: absolute;
+top: 92%; 
+left: 65%;
+overflow: hidden;
+}
+/* G1280*/
+/* Gmail Position 1280px*/
+@media (max-width: 1280px) {
+ .Gmail {
+top: 92%;
+    left: 67%;
+
+  }
+}
+/* G880*/
+/* Gmail Position 880px*/
+@media (max-width: 880px) {
+  .Gmail {
+top: 1%;
+    left: 89%;
+    transform: translateX(10%); 
+  }
+}
+/* G540*/
+/* Gmail Position 540px*/
+@media (max-width: 540px) {
+  .Gmail {
+top: 9%;
+    left: 60%;
+transform: translateX(10%); 
+  }
+}
+/* G400*/
+/* Gmail Position 400px*/
+@media (max-width: 400px) {
+  .Gmail {
+top: 1%;
+    right: -83.5%;
+transform: translateX(10%); 
+  }
+}
+</style>
+<!Start of MAL!>
+<div class="MAL">
+<img src='https://cdn.myanimelist.net/images/favicon.ico' onclick='MAL()'">
+</div>
+<!Javascript to open in new tab!>
+    <script>
+        function MAL() {
+            window.location.replace('https://myanimelist.net/anime/season');
+        }
+</script>
+<style>
+/* MAL1920*/
+/*MAL Position 1920px*/
+.MAL {
+position: absolute;
+top: 92%;
+left: 62%;
+overflow: hidden;
+}
+/* MAL1280*/
+/* MAL Position 1280px*/
+@media (max-width: 1280px) {
+ .MAL {
+top: 85%;
+left: 69%;
+  }
+}
+/* MAL880*/
+/* MAL Position 880px*/
+@media (max-width: 880px) {
+  .MAL {
+top: 8%;
+    left: 89.5%;
+    transform: translateX(10%); 
+  }
+}
+/* MAL540*/
+/* MAL Position 540px*/
+@media (max-width: 540px) {
+  .MAL {
+top: 2%;
+left: 60%;
+transform: translateX(10%); 
+  }
+}
+/* MAL400*/
+/* MAL Position 400px*/
+@media (max-width: 400px) {
+  .MAL {
+top: 8%;
+right: -208.5%;
+transform: translateX(10%); 
+  }
+}
+</style>
+<!Start of ANI!>
+<div class="ANI">
+<img src='https://www.aniwave.in/images/logo.png' onclick='ANI()'">
+</div>
+<!Javascript to open in new tab!>
+    <script>
+        function ANI() {
+            window.location.replace('https://aniwave.to/home');
+        }
+</script>
+<! END OF ANIWAVE!>
+<style>
+/* ANI1920*/
+/*ANI Position 1920px*/
+.ANI {
+position: absolute;
+top: 92%;
+left: 34%;
+overflow: hidden;
+}
+/* ANI1280*/
+/* ANI Position 1280px*/
+@media (max-width: 1280px) {
+ .ANI {
+top: 85%;
+left: 24%;
+  }
+}
+/* ANI880*/
+/* ANI Position 880px*/
+@media (max-width: 880px) {
+  .ANI {
+top: 8%;
+left: 77.5%;
+    transform: translateX(10%); 
+  }
+}
+/* ANI540*/
+/* ANI Position 540px*/
+@media (max-width: 540px) {
+  .ANI {
+top: 2%;
+left: 46%;
+transform: translateX(10%); 
+  }
+}
+/* ANI400*/
+/* ANI Position 400px*/
+@media (max-width: 400px) {
+  .ANI {
+top: 1%;
+right: -332.5%;
+transform: translateX(10%); 
+  }
+}
+</style>    
+<!Start of PCP!>
+<div class="PCP">
+<img src='https://pcpartpicker.com/favicon-16x16.png' onclick='PCP()'">
+</div>
+<!Javascript to open in new tab!>
+    <script>
+        function PCP() {
+            window.location.replace('https://pcpartpicker.com/list/');
+        }
+</script>
+<style>
+/* PCP1920*/
+/*PCP Position 1920px*/
+.PCP {
+position: absolute;
+top: 92%;
+left: 31%;
+overflow: hidden;
+}
+/* PCP1280*/
+/* PCP Position 1280px*/
+@media (max-width: 1280px) {
+ .PCP {
+top: 85%;
+left: 24%;
+  }
+}
+/* PCP880*/
+/* PCP Position 880px*/
+@media (max-width: 880px) {
+  .PCP {
+top: 8%;
+left: 77.5%;
+    transform: translateX(10%); 
+  }
+}
+/* ANI540*/
+/* ANI Position 540px*/
+@media (max-width: 540px) {
+  .PCP {
+top: 2%;
+left: 46%;
+transform: translateX(10%); 
+  }
+}
+/* PCP400*/
+/* PCP Position 400px*/
+@media (max-width: 400px) {
+  .PCP {
+top: 1%;
+right: -332.5%;
+transform: translateX(10%); 
+  }
+}
+</style>    
+<! END OF PC PART PICKER!>
+<!Start of Amazon!>
+<div class="AM">
+<img src='https://www.amazon.com/favicon.ico' onclick='AM()'">
+</div>
+<!Javascript to open in new tab!>
+    <script>
+        function AM() {
+            window.location.replace('https://www.amazon.com/gp/cart/view.html?ref_=nav_cart');
+        }
+</script>
+<style>
+/* AM1920*/
+/*AM Position 1920px*/
+.AM {
+position: absolute;
+top: 92%;
+left: 28%;
+overflow: hidden;
+}
+/* AM1280*/
+/* AM Position 1280px*/
+@media (max-width: 1280px) {
+ .PCP {
+top: 85%;
+left: 24%;
+  }
+}
+/* AM880*/
+/* AM Position 880px*/
+@media (max-width: 880px) {
+  .PCP {
+top: 8%;
+left: 77.5%;
+    transform: translateX(10%); 
+  }
+}
+/* AM540*/
+/* AM Position 540px*/
+@media (max-width: 540px) {
+  .PCP {
+top: 2%;
+left: 46%;
+transform: translateX(10%); 
+  }
+}
+/* AM400*/
+/* AM Position 400px*/
+@media (max-width: 400px) {
+  .AM {
+top: 1%;
+right: -332.5%;
+transform: translateX(10%); 
+  }
+}
+</style>    
+<! END OF PC PART PICKER!>
+<!-- START OF NOTEPAD! -->
+    <style>
+        #notes {
+            width: 300px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: auto;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+            position: fixed;
+            resize: both;
+            cursor: grab;
+            top: 50%; 
+            left: 50%;
+            transform: translate(-50%, -50%); 
+        }
+    </style>
+
+<textarea id="notes"></textarea>
+
+<script>
+    const broadcast = new BroadcastChannel('note_updates');
+    const notes = document.getElementById('notes');
+
+    // Function to return the notepad to the center of the website
+    function RETURN() {
+        const centerX = (window.innerWidth - notes.offsetWidth) / 2;
+        const centerY = (window.innerHeight - notes.offsetHeight) / 2;
+        notes.style.left = `${centerX}px`;
+        notes.style.top = `${centerY}px`;
+        const position = { top: `${centerY}px`, left: `${centerX}px` };
+        const size = { width: notes.style.width, height: notes.style.height };
+        saveNote(notes.value, position, size);
+        console.log('Notepad reset to center position.');
+    }
+
+    // Attach the RETURN function to the window object for console access
+    window.RETURN = RETURN;
+    function initDB(callback) {
+        var request = indexedDB.open('notesDB', 2);
+
+        request.onupgradeneeded = function(event) {
+            var db = event.target.result;
+            if (!db.objectStoreNames.contains('notes')) {
+                db.createObjectStore('notes', { keyPath: 'id' });
+            }
+        };
+
+        request.onsuccess = function(event) {
+            callback(event.target.result);
+        };
+
+        request.onerror = function(event) {
+            console.error('Database error:', event.target.error);
+        };
+    }
+
+    function saveNote(content, position, size) {
+        initDB(function(db) {
+            var transaction = db.transaction('notes', 'readwrite');
+            var objectStore = transaction.objectStore('notes');
+            objectStore.put({ id: 'singleNote', content, position, size });
+        });
+    }
+
+    function loadNote() {
+        initDB(function(db) {
+            var transaction = db.transaction('notes', 'readonly');
+            var objectStore = transaction.objectStore('notes');
+            var request = objectStore.get('singleNote');
+            request.onsuccess = function(event) {
+                var data = event.target.result;
+                if (data) {
+                    notes.value = data.content;
+                    notes.style.top = data.position.top;
+                    notes.style.left = data.position.left;
+                    notes.style.width = data.size.width;
+                    notes.style.height = data.size.height;
+                }
+            };
+        });
+    }
+    function RETURN() {
+        const centerX = (window.innerWidth - notes.offsetWidth) / 2;
+        const centerY = (window.innerHeight - notes.offsetHeight) / 2;
+        notes.style.left = `${centerX}px`;
+        notes.style.top = `${centerY}px`;
+        const position = { top: `${centerY}px`, left: `${centerX}px` };
+        const size = { width: notes.style.width, height: notes.style.height };
+        saveNote(notes.value, position, size);
+        console.log('Notepad reset to center position.');
+    }
+
+    window.RETURN = RETURN;
+
+    // Function to get the byte size of a string
+    function getByteSize(str) {
+        return new Blob([str]).size;
+    }
+
+    // Function to check the memory usage of the notepad
+    function checkMemoryUsage() {
+        const content = notes.value;
+        const sizeInBytes = getByteSize(content);
+        const sizeInMegabytes = sizeInBytes / (1024 * 1024);
+        console.log(`Estimated notepad size: ${sizeInMegabytes.toFixed(2)} MB`);
+
+        if (sizeInMegabytes >= 10) {
+            console.log('Notepad size exceeds 10 MB. Initiating clear.');
+            clearNotepad();
+        } else {
+            console.log('Notepad size within limit. No action taken.');
+        }
+    }
+
+    // Function to clear the notepad content
+    function clearNotepad() {
+        notes.value = '';
+        const position = { top: '50%', left: '50%' }; // Reset position to center
+        const size = { width: '300px', height: '200px' }; // Reset size to default
+        saveNote('', position, size);
+        broadcast.postMessage({ content: '', position, size });
+        console.log('Notepad content cleared and reset to default size and position.');
+    }
+
+    // Combine the save position, check memory usage, and save size logic into one input event listener
+    notes.addEventListener('input', function() {
+        const position = { top: this.style.top, left: this.style.left };
+        const size = { width: this.style.width, height: this.style.height };
+        saveNote(this.value, position, size);
+        checkMemoryUsage();
+    });
+
+    // Prevent the context menu on right-click
+    notes.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+    });
+
+    // Update the notepad size and position upon mouseup
+    notes.addEventListener('mouseup', function() {
+        const position = { top: notes.style.top, left: notes.style.left };
+        const size = { width: notes.style.width, height: notes.style.height };
+        saveNote(notes.value, position, size);
+    });
+    // Right-click drag functionality
+    notes.addEventListener('mousedown', function(event) {
+        if (event.button === 2) {
+            event.preventDefault();
+            let startPos = { x: event.clientX, y: event.clientY };
+
+            const onMove = function(moveEvent) {
+                let newPos = {
+                    x: notes.offsetLeft + (moveEvent.clientX - startPos.x),
+                    y: notes.offsetTop + (moveEvent.clientY - startPos.y)
+                };
+
+                notes.style.left = `${newPos.x}px`;
+                notes.style.top = `${newPos.y}px`;
+                startPos = { x: moveEvent.clientX, y: moveEvent.clientY };
+            };
+
+            const onUp = function(upEvent) {
+                document.removeEventListener('mousemove', onMove);
+                document.removeEventListener('mouseup', onUp);
+                saveNote(notes.value, { top: notes.style.top, left: notes.style.left }, { width: notes.style.width, height: notes.style.height });
+            };
+
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onUp);
+        }
+    });
+
+    window.addEventListener('load', loadNote);
+    window.addEventListener('beforeunload', function() {
+        broadcast.close();
+    });
+</script>
+
+</body>
